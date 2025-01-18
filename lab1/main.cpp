@@ -1,5 +1,4 @@
 #include <iostream>
-#include <math.h>
 using namespace std;
 
 bool Is3InNum(int n)
@@ -23,7 +22,7 @@ struct Node
 
 };
 
-void sortList(Node** sent) {
+void SortList(Node** sent) {
     if (*sent == nullptr) {
         return;
     }
@@ -36,7 +35,7 @@ void sortList(Node** sent) {
         index = current->right;
 
         while (index != *sent) {
-            if (current->data > index->data) {
+            if (current->data % 10 > index->data % 10) {
                 temp = current->data;
                 current->data = index->data;
                 index->data = temp;
@@ -118,16 +117,6 @@ int main()
     sent->left = sent;
     sent->right = sent;
 
-    AddBack(sent, 1);
-    AddBack(sent, 2);
-    AddBack(sent, 3);
-
-
-    PrintList(sent);
-
-    Clear(sent);
-    delete sent;
-
     while (1) // Ввод натуральных чисел, 0 - конец
     {
         int n;
@@ -136,9 +125,17 @@ int main()
             break;
         AddBack(sent, n);
     }
-    int n;
-    cin >> n;
-    cout << (n % 10) << endl;
-    return 0;
 
+    if (DuplicateInList)
+    {
+        SortList(&sent);
+    }
+    else
+    {
+        DeleteWith3(sent);
+    }
+    // добавить функцию с дублированием 7-чисел, доделать, редактировать сортировку
+    
+    Clear(sent);
+    delete sent;
 }
