@@ -5,8 +5,20 @@ bool Is3InNum(int n)
 {
     while (n >= 10)
     {
-        if ((n /= 10) == 3)
+        if ((n % 10) == 3)
             return true;
+        n /= 10;
+    }
+    return false;
+}
+
+bool Is7InNum(int n)
+{
+    while (n >= 10)
+    {
+        if ((n % 10) == 7)
+            return true;
+        n /= 10;
     }
     return false;
 }
@@ -22,13 +34,39 @@ struct Node
 
 };
 
-void SortList(Node** sent) {
+void AddBack(Node* sent, int data)
+{
+    Node* p = new Node;
+    p->data = data;
+    p->left = sent->left;
+    p->right = sent;
+    sent->left->right = p;
+    sent->left = p;
+}
+
+void Duplicate7Num(Node* sent)
+{
+    Node* p = sent->right;
+    while (p != sent)
+    {
+        if (Is7InNum(p->data))
+        {
+            Node* n = new Node;
+            n->data = p->data;
+            p->right = n->left;
+            p->right = n; 
+            // доделать
+        }
+    }
+}
+
+void SortListLastDigit(Node** sent) {
     if (*sent == nullptr) {
         return;
     }
 
     Node* current = *sent;
-    Node *index = nullptr;
+    Node* index = nullptr;
     int temp;
 
     do {
@@ -77,16 +115,6 @@ bool DuplicateInList(Node* sent)
     return false;
 }
 
-void AddBack(Node* sent, int data)
-{
-    Node* p = new Node;
-    p->data = data;
-    p->left = sent->left;
-    p->right = sent;
-    sent->left->right = p;
-    sent->left = p;
-}
-
 void PrintList(Node* sent)
 {
     Node* p  = sent->right;
@@ -128,11 +156,12 @@ int main()
 
     if (DuplicateInList)
     {
-        SortList(&sent);
+        SortListLastDigit(&sent);
     }
     else
     {
         DeleteWith3(sent);
+        Duplicate7Num(sent);
     }
     // добавить функцию с дублированием 7-чисел, доделать, редактировать сортировку
     
