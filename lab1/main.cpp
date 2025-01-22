@@ -24,8 +24,6 @@ bool Is7InNum(int n)
 }
 
 
-
-
 struct Node
 {
     int data;
@@ -34,7 +32,7 @@ struct Node
 
 };
 
-void AddBack(Node* sent, int data)
+void PushBack(Node* sent, int data)
 {
     Node* p = new Node;
     p->data = data;
@@ -53,9 +51,10 @@ void Duplicate7Num(Node* sent)
         {
             Node* n = new Node;
             n->data = p->data;
-            p->right = n->left;
-            p->right = n; 
-            // доделать
+            n->left = p;
+            n->right = p->right;
+            p->right->left = n;
+            p->right = n;
         }
     }
 }
@@ -104,13 +103,16 @@ bool DuplicateInList(Node* sent)
 {
     Node* n = sent->right;
     Node* p = sent->right;
-    while (n != sent)
+    while (n->right != sent)
     {
+        p = n->right;
         while (p != sent)
         {
-            if ((n->data == p->data) && (n != p))
+            if ((n->data == p->data))
                 return true;
+            p = p->right;
         }
+        n = n->right;
     }
     return false;
 }
@@ -151,7 +153,7 @@ int main()
         cin >> n;
         if (n == 0)
             break;
-        AddBack(sent, n);
+        PushBack(sent, n);
     }
 
     if (DuplicateInList)
@@ -163,7 +165,7 @@ int main()
         DeleteWith3(sent);
         Duplicate7Num(sent);
     }
-    // добавить функцию с дублированием 7-чисел, доделать, редактировать сортировку
+    
     
     Clear(sent);
     delete sent;
