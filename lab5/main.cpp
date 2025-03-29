@@ -21,7 +21,7 @@ class MyVec
             m_cap = size;
             m_size = size;
         }
-        ~MyVec()
+        ~MyVec() // деструктор
         {
             if(m_arr != nullptr)
             {
@@ -34,14 +34,14 @@ class MyVec
             if(m_size + 1 <= m_cap)
             {
                 m_arr[m_size] = value;
-                m_size++;
+                m_size ++;
                 return;
             }
 
-            m_cap = m_cap*2 + 1;
+            m_cap = m_cap * 2 + 1;
             int* tmp = new int[m_cap];
 
-            for(int i=0;i<m_size;i++)
+            for(int i = 0; i < m_size; i++)
             {
                 tmp[i] = m_arr[i];
             }
@@ -68,12 +68,15 @@ class MyVec
             {
                 return;
             }
+
             m_cap = cap;
             int* temp = new int[m_cap];
-            for(int i=0;i<m_size;i++)
+
+            for(int i = 0; i < m_size; i++)
             {
                 temp[i] = m_arr[i];
             }
+
             delete[] m_arr;
             m_arr = temp;
         }
@@ -82,13 +85,14 @@ class MyVec
         {
             m_cap = m_size;
             int* tmp = new int[m_cap];
-            for(int i=0;i<m_size;i++)
+            for(int i = 0; i < m_size; i++)
             {
                 tmp[i] = m_arr[i];
             }
             delete[] m_arr;
             m_arr = tmp;
         }
+
         int& operator[](size_t index)
         {
             return m_arr[index];
@@ -101,9 +105,9 @@ class MyVec
         {
             return m_arr[0];
         }
-        bool empty()
+        bool empty() // проверка на пустой вектор
         {
-            if(m_arr!=nullptr)
+            if(m_arr != nullptr)
             {
                 return false;
             }
@@ -122,7 +126,7 @@ class MyVec
             {
                 int* tmp = new int[n_size];
                 
-                for(int i=0;i<n_size;i++)
+                for(int i = 0;i < n_size; i++)
                 {
                     tmp[i] = m_arr[i];
                 }
@@ -135,20 +139,20 @@ class MyVec
             reserve(m_size);
         }
 
-        void insert(int index,int value)
+        void insert(int index, int value)
         {
-            int size = m_size+1;
+            int size = m_size + 1;
             int* tmp = new int[size];
-                for(int i=0;i<index;i++)
+                for(int i = 0; i < index; i++)
                 {
                     tmp[i] = m_arr[i];
                 }
 
                 tmp[index] = value;
 
-                for(int i=index+1;i<m_size+1;i++)
+                for(int i = index + 1;i < m_size+1; i++)
                 {
-                    tmp[i] = m_arr[i-1];
+                    tmp[i] = m_arr[i - 1];
                 }
 
                 delete[] m_arr;
@@ -158,39 +162,46 @@ class MyVec
 
         void erase(int index)
         {       
-            int size = m_size-1;
+            int size = m_size - 1;
             int* tmp = new int[size];
 
-            for(int i=0;i<index;i++)
+            for(int i = 0; i < index; i++)
             {
                 tmp[i] = m_arr[i];
             }
 
-            for(int i=index;i<size;i++)
+            for(int i=index; i < size; i++)
             {
-                tmp[i] = m_arr[i+1];
+                tmp[i] = m_arr[i + 1];
             }
 
             delete[] m_arr;
             m_arr = tmp;
-            m_size-=1;
+            m_size -= 1;
         }
 };
 
 int main()
 {
-    MyVec mas(5,0);
+    MyVec mas(5, 1);
 
-    for(int i = 0; i<mas.size();i++)
+    for(int i = 0; i < mas.size(); i++)
     {
-        mas[i]=i+1;
+        cout << mas[i] << endl;
     }
 
-    cout << mas.size()<<endl;
-    mas.erase(1);
-    cout << mas.size()<<endl;
 
-    for(int i = 0; i<mas.size();i++)
+    for(int i = 0; i < mas.size(); i++)
+    {
+        mas[i]= i + 1;
+    }
+
+    cout << mas.size() << endl;
+    mas.erase(1);
+    mas.stf();
+    cout << mas.size() << endl;
+
+    for(int i = 0; i < mas.size(); i++)
     {
         cout << mas[i] << endl;
     }
