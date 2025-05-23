@@ -1,0 +1,10 @@
+^C:\GIT\LABS_SEM2\SFML_SAMPLE-MAIN\BUILD\CMAKEFILES\F5AEB5E46B8C47DDFA4B938EF04C728E\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/git/labs_sem2/sfml_sample-main -BC:/git/labs_sem2/sfml_sample-main/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/git/labs_sem2/sfml_sample-main/build/sfml_sample.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

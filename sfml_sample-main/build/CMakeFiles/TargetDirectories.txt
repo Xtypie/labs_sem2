@@ -1,0 +1,3 @@
+C:/git/labs_sem2/sfml_sample-main/build/CMakeFiles/sfml_sample.dir
+C:/git/labs_sem2/sfml_sample-main/build/CMakeFiles/ALL_BUILD.dir
+C:/git/labs_sem2/sfml_sample-main/build/CMakeFiles/ZERO_CHECK.dir
